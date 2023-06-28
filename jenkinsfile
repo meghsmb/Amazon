@@ -27,7 +27,12 @@ stages {
     steps {
       sh 'mvn test'
     }
-
+ stage('deploy') {
+  steps {
+    sh 'chmod 777 scripts/deliver.sh'
+   sh 'scripts/deliver.sh'
+  }
+}
     post {
       always {
         archiveArtifacts artifacts: 'Amazon-Core/target/*.jar', followSymlinks: false
@@ -35,6 +40,8 @@ stages {
       }
     }
   }
+
+}
 
 }
 
